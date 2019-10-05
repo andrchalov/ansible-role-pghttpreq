@@ -1,0 +1,4 @@
+---
+- name: plan to restart pghttpreq
+  set_fact:
+    __pghttpreq_restart: true

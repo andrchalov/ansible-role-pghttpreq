@@ -1,0 +1,17 @@
+---
+- name: (re)start pghttpreq container
+  docker_container:
+    name: "{{ pghttpreq_docker_name }}"
+    image: "{{ pghttpreq_docker_image }}"
+    network_mode: host
+    env:
+      PG_HOST: "{{ pghttpreq_host }}"
+      PG_DATABASE: "{{ pghttpreq_db }}"
+      PG_USER: "{{ pghttpreq_user }}"
+      PG_PASSWORD: "{{ pghttpreq_password }}"
+      CHANNEL: "{{ pghttpreq_channel }}"
+      LOGLEVEL: "{{ pghttpreq_loglevel }}"
+    restart_policy: always
+    restart: "{{ __pghttpreq_restart | default(false) }}"
+    pull: true
+    state: "started"

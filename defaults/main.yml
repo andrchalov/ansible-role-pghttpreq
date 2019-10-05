@@ -1,0 +1,9 @@
+---
+pghttpreq_docker_name: pghttpreq
+pghttpreq_docker_image: andrchalov/pghttpreq:latest
+pghttpreq_host: localhost
+pghttpreq_user: pghttpreq
+pghttpreq_db: postgres
+pghttpreq_password: pghttpreq
+pghttpreq_channel: pghttpreq
+pghttpreq_loglevel: ERROR
