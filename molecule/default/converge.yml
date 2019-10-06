@@ -2,5 +2,32 @@
 - name: Converge
   hosts: all
 
+  vars:
+    pghttpreq_loglevel: ERROR
+
   roles:
     - role: ansible-role-pghttpreq
+
+  post_tasks:
+    - name: Wait a little bit, for pghttpreq complete db deploy
+      shell: sleep 5
+      changed_when: false
+
+    - name: Check pghttpreq deployed successfully and remove all jobs
+      shell: psql -U postgres -h localhost -1 -c "DELETE FROM _pghttpreq.job"
+
+    - name: Add a job
+      shell: psql -U postgres -h localhost -1 -c "INSERT INTO _pghttpreq.job (method, url) VALUES ('POST', 'http://httpbin.org/anything')"
+
+    - name: Wait for the work to finish
+      shell: sleep 5
+
+    - name: Get count of complete jobs
+      shell: psql -U postgres -h localhost -qtA -1 -c "SELECT count(*) FROM _pghttpreq.job WHERE complete NOTNULL"
+      register: __complete_count
+
+    - debug: var="__complete_count"
+
+    - name: Check count of complete jobs
+      assert:
+        that: __complete_count.stdout == '1'

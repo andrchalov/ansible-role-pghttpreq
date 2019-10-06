@@ -5,5 +5,6 @@ pghttpreq_host: localhost
 pghttpreq_user: pghttpreq
 pghttpreq_db: postgres
 pghttpreq_password: pghttpreq
+pghttpreq_schema: pghttpreq
 pghttpreq_channel: pghttpreq
 pghttpreq_loglevel: ERROR
