@@ -1,8 +1,8 @@
 build:
-	docker-compose build
+	docker build docker -t andrchalov/pghttpreq:latest
 
 run:
-	docker-compose up -d
+	docker run -it --name pghttpreq andrchalov/pghttpreq:latest
 
-stop:
-	docker-compose down
+push:
+	docker push andrchalov/pghttpreq:latest
