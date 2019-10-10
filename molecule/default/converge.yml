@@ -5,6 +5,15 @@
   vars:
     pghttpreq_loglevel: ERROR
 
+  pre_tasks:
+    - name: Build docker image
+      docker_image:
+        name: pghttpreq
+        tag: dev
+        build:
+          path: ../../../
+          source: build
+  
   roles:
     - role: ansible-role-pghttpreq
 
